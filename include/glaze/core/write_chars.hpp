@@ -86,7 +86,11 @@ namespace glz::detail
             else if constexpr (is_any_of<V, float, double>) {
                const auto start = reinterpret_cast<char*>(&b[ix]);
                const auto end = glz::to_chars(start, value);
-               ix += size_t(end - start);
+               if constexpr (bool(Opts.write_whole_float_as_float)) {
+                  ix += size_t(end - start + (end[0] == '.' ? 2 : 0)); // add 2 for ".0"
+               } else {
+                  ix += size_t(end - start);
+               }
             }
             else if constexpr (is_float128<V>) {
                const auto start = reinterpret_cast<char*>(&b[ix]);

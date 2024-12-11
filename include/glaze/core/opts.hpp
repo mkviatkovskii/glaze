@@ -99,6 +99,8 @@ namespace glz
       bool_t hide_non_invocable =
          true; // Hides non-invocable members from the cli_menu (may be applied elsewhere in the future)
 
+      bool_t write_whole_float_as_float = false; // Save whole numbers as floats instead of integers
+
       enum struct internal : uint32_t {
          none = 0,
          opening_handled = 1 << 0, // the opening character has been handled
